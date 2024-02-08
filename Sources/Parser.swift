@@ -7,7 +7,7 @@
 
 struct Parser {
     static func parseIntermediateRepresentation(from code: String) -> [Operation] {
-        var operationTypes = code.compactMap(OperationType.init)
+        let operationTypes = code.compactMap(OperationType.init)
         var operations = [Operation]()
         
         for index in operationTypes.startIndex..<operationTypes.endIndex {
