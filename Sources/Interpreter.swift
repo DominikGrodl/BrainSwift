@@ -57,7 +57,7 @@ struct Interpreter {
                 Output.codeOutput(value: memory[memoryPointer])
                 operationsPointer += 1
                 
-                //conditionally jump forward to corresponding address is current value in memmory is 0
+                //conditionally jump forward to corresponding address if current value in memmory is 0
             case .jumpIfZero:
                 if memory[memoryPointer] == 0 {
                     operationsPointer = op.jumpAddress
@@ -65,7 +65,7 @@ struct Interpreter {
                     operationsPointer += 1
                 }
                 
-                //conditionally jump backwards to corresponding address is current value in memmory is not 0
+                //conditionally jump backwards to corresponding address if current value in memmory is not 0
             case .jumpIfNotZero:
                 if memory[memoryPointer] != 0 {
                     operationsPointer = op.jumpAddress
