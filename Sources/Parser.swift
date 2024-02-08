@@ -47,6 +47,7 @@ struct Parser {
             switch trimmed[index] {
             case .jumpIfZero:
                 buffer += 1
+                
             case .jumpIfNotZero:
                 buffer -= 1
                 
@@ -58,7 +59,7 @@ struct Parser {
             }
         }
         
-        fatalError("Unable to find corresponding jump address")
+        fatalError("Unable to find corresponding jump address for [ token at address \(from)")
     }
     
     private static func findCorrespondingJumpAddressBackward(
@@ -83,6 +84,6 @@ struct Parser {
             }
         }
         
-        fatalError("Unable to find corresponding jump address")
+        fatalError("Unable to find corresponding jump address for ] token at address \(from)")
     }
 }

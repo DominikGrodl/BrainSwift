@@ -1,7 +1,7 @@
 import Foundation
 
 struct Interpreter {
-    static func interpret(_ operations: [Operation]) throws {
+    static func interpret(_ operations: [Operation], outputMemory: Bool) throws {
         var memory: [UInt8] = [0]
         var memoryPointer = memory.startIndex
         var operationsPointer = operations.startIndex
@@ -53,7 +53,9 @@ struct Interpreter {
             }
         }
         
-        Output.outputMemory(memory)
+        if outputMemory {
+            Output.outputMemory(memory)
+        }
     }
     
     private static func getIncrement(current: UInt8) -> UInt8 {
