@@ -73,22 +73,28 @@ struct Parser {
         in operations: [OperationType],
         from: [OperationType].Index
     ) -> [OperationType].Index {
-        let trimmed = Array(operations[...from].reversed())
+        let trimmed = operations[...from]
         var buffer = 0
+        var index = trimmed.endIndex - 1
         
-        for index in trimmed.startIndex..<trimmed.endIndex {
+        while index >= trimmed.startIndex {
             switch trimmed[index] {
             case .jumpIfZero:
                 buffer -= 1
             case .jumpIfNotZero:
                 buffer += 1
                 
-            default: continue
+            default:
+                index -= 1
+                continue
+            }
+            print(buffer)
+            if buffer == 0 {
+                print("returning buffer for index:", index, ", buffer:", buffer)
+                return index + 1
             }
             
-            if buffer == 0 {
-                return from - index + 1
-            }
+            index -= 1
         }
         
         fatalError("Unable to find corresponding jump address for ] token at address \(from)")
