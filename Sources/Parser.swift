@@ -88,9 +88,8 @@ struct Parser {
                 index -= 1
                 continue
             }
-            print(buffer)
+            
             if buffer == 0 {
-                print("returning buffer for index:", index, ", buffer:", buffer)
                 return index + 1
             }
             
