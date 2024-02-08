@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  BrainSwift.swift
 //  
 //
 //  Created by Dominik Grodl on 08.02.2024.

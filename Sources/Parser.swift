@@ -1,3 +1,10 @@
+//
+//  Parser.swift
+//
+//
+//  Created by Dominik Grodl on 08.02.2024.
+//
+
 struct Parser {
     static func parseIntermediateRepresentation(from code: String) -> [Operation] {
         var operationTypes = code.compactMap(OperationType.init)

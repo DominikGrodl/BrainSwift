@@ -1,3 +1,10 @@
+//
+//  Interpreter.swift
+//
+//
+//  Created by Dominik Grodl on 08.02.2024.
+//
+
 import Foundation
 
 struct Interpreter {

@@ -1,3 +1,10 @@
+//
+//  Error.swift
+//
+//
+//  Created by Dominik Grodl on 08.02.2024.
+//
+
 import Foundation
 
 enum ValidationError: Error {

@@ -1,3 +1,10 @@
+//
+//  Output.swift
+//
+//
+//  Created by Dominik Grodl on 08.02.2024.
+//
+
 struct Output {
     static func outputIntermediateRepresentation(_ operations: [Operation]) {
         let mapped = operations
