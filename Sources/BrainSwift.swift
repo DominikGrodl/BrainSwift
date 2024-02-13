@@ -17,7 +17,7 @@ struct BrainSwift: ParsableCommand {
     func run() throws {
         let url = try validateInputReturnPath()
         let data = try extractProgramCode(url)
-        let representation = Parser.parseIntermediateRepresentation(from: data)
+        let representation = try Parser.parseIntermediateRepresentation(from: data)
         
         if outputIntermediateRepresentation {
             Output.outputIntermediateRepresentation(representation)
