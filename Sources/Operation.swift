@@ -5,17 +5,15 @@
 //  Created by Dominik Grodl on 08.02.2024.
 //
 
-import Foundation
-
-enum OperationType: Character {
-    case right = ">"
-    case left = "<"
-    case increment = "+"
-    case decrement = "-"
-    case output = "."
-    case input = ","
-    case jumpIfZero = "["
-    case jumpIfNotZero = "]"
+enum OperationType: UInt8 {
+    case right = 0x3e // ">"
+    case left = 0x3c // "<"
+    case increment = 0x2b // "+"
+    case decrement = 0x2d // "-"
+    case output = 0x2e // "."
+    case input = 0x2c // ","
+    case jumpIfZero = 0x5b // "["
+    case jumpIfNotZero = 0x5d // "]"
 }
 
 struct Operation: CustomDebugStringConvertible {

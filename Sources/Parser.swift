@@ -5,8 +5,10 @@
 //  Created by Dominik Grodl on 08.02.2024.
 //
 
+import Foundation
+
 struct Parser {
-    static func parseIntermediateRepresentation(from code: String) -> [Operation] {
+    static func parseIntermediateRepresentation(from code: Data) throws -> [Operation] {
         let operationTypes = code.compactMap(OperationType.init)
         var operations = [Operation]()
         
@@ -21,7 +23,7 @@ struct Parser {
                 operations.append(
                     Operation(
                         type: operationType,
-                        jumpAddress: findCorrespondingJumpAddressForward(
+                        jumpAddress: try findCorrespondingJumpAddressForward(
                             in: operationTypes,
                             from: index
                         )
@@ -31,7 +33,7 @@ struct Parser {
                 operations.append(
                     Operation(
                         type: operationType,
-                        jumpAddress: findCorrespondingJumpAddressBackward(
+                        jumpAddress: try findCorrespondingJumpAddressBackward(
                             in: operationTypes,
                             from: index
                         )
@@ -46,12 +48,12 @@ struct Parser {
     private static func findCorrespondingJumpAddressForward(
         in operations: [OperationType],
         from: [OperationType].Index
-    ) -> [OperationType].Index {
-        let trimmed = operations[from...]
+    ) throws -> [OperationType].Index {
+        let window = operations[from...]
         var buffer = 0
         
-        for index in trimmed.startIndex..<trimmed.endIndex {
-            switch trimmed[index] {
+        for index in window.startIndex..<window.endIndex {
+            switch window[index] {
             case .jumpIfZero:
                 buffer += 1
                 
@@ -62,23 +64,23 @@ struct Parser {
             }
             
             if buffer == 0 {
-                return index + 1
+                return index + 1 // + 1 because we want to jump to the address after the corresponding token
             }
         }
         
-        fatalError("Unable to find corresponding jump address for [ token at address \(from)")
+        throw ParsingError.noCorrespondingJumpAddress(OperationType.jumpIfZero.rawValue, from)
     }
     
     private static func findCorrespondingJumpAddressBackward(
         in operations: [OperationType],
         from: [OperationType].Index
-    ) -> [OperationType].Index {
-        let trimmed = operations[...from]
+    ) throws -> [OperationType].Index {
+        let window = operations[...from]
         var buffer = 0
-        var index = trimmed.endIndex - 1
+        var index = window.endIndex - 1
         
-        while index >= trimmed.startIndex {
-            switch trimmed[index] {
+        while index >= window.startIndex {
+            switch window[index] {
             case .jumpIfZero:
                 buffer -= 1
             case .jumpIfNotZero:
@@ -90,12 +92,12 @@ struct Parser {
             }
             
             if buffer == 0 {
-                return index + 1
+                return index + 1 // + 1 because we want to jump to the address after the corresponding token
             }
             
             index -= 1
         }
         
-        fatalError("Unable to find corresponding jump address for ] token at address \(from)")
+        throw ParsingError.noCorrespondingJumpAddress(OperationType.jumpIfNotZero.rawValue, from)
     }
 }
