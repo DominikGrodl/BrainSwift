@@ -47,11 +47,11 @@ struct Parser {
         in operations: [OperationType],
         from: [OperationType].Index
     ) -> [OperationType].Index {
-        let trimmed = operations[from...]
+        let window = operations[from...]
         var buffer = 0
         
-        for index in trimmed.startIndex..<trimmed.endIndex {
-            switch trimmed[index] {
+        for index in window.startIndex..<window.endIndex {
+            switch window[index] {
             case .jumpIfZero:
                 buffer += 1
                 
@@ -73,12 +73,12 @@ struct Parser {
         in operations: [OperationType],
         from: [OperationType].Index
     ) -> [OperationType].Index {
-        let trimmed = operations[...from]
+        let window = operations[...from]
         var buffer = 0
-        var index = trimmed.endIndex - 1
+        var index = window.endIndex - 1
         
-        while index >= trimmed.startIndex {
-            switch trimmed[index] {
+        while index >= window.startIndex {
+            switch window[index] {
             case .jumpIfZero:
                 buffer -= 1
             case .jumpIfNotZero:
