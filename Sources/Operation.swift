@@ -5,9 +5,7 @@
 //  Created by Dominik Grodl on 08.02.2024.
 //
 
-import Foundation
-
-enum OperationType: UTF8.CodeUnit {
+enum OperationType: UInt8 {
     case right = 0x3e // ">"
     case left = 0x3c // "<"
     case increment = 0x2b // "+"

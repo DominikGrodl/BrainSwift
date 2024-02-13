@@ -5,8 +5,10 @@
 //  Created by Dominik Grodl on 08.02.2024.
 //
 
+import Foundation
+
 struct Parser {
-    static func parseIntermediateRepresentation(from code: [UInt8]) throws -> [Operation] {
+    static func parseIntermediateRepresentation(from code: Data) throws -> [Operation] {
         let operationTypes = code.compactMap(OperationType.init)
         var operations = [Operation]()
         

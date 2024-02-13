@@ -17,15 +17,13 @@ struct BrainSwift: ParsableCommand {
     func run() throws {
         let url = try validateInputReturnPath()
         let data = try extractProgramCode(url)
-        
-        let start = Date()
         let representation = try Parser.parseIntermediateRepresentation(from: data)
-        print("Took:", Date().timeIntervalSince(start))
-//        if outputIntermediateRepresentation {
-//            Output.outputIntermediateRepresentation(representation)
-//        }
-//        
-//        try Interpreter.interpret(representation, outputMemory: outputMemory)
+        
+        if outputIntermediateRepresentation {
+            Output.outputIntermediateRepresentation(representation)
+        }
+        
+        try Interpreter.interpret(representation, outputMemory: outputMemory)
     }
     
     func validateInputReturnPath() throws -> URL {
@@ -40,7 +38,7 @@ struct BrainSwift: ParsableCommand {
         return url
     }
     
-    func extractProgramCode(_ url: URL) throws -> [UInt8] {
-        try Data(contentsOf: url).map { $0 }
+    func extractProgramCode(_ url: URL) throws -> Data {
+        try Data(contentsOf: url)
     }
 }
