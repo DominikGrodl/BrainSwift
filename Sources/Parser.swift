@@ -6,7 +6,7 @@
 //
 
 struct Parser {
-    static func parseIntermediateRepresentation(from code: String) throws -> [Operation] {
+    static func parseIntermediateRepresentation(from code: [UInt8]) throws -> [Operation] {
         let operationTypes = code.compactMap(OperationType.init)
         var operations = [Operation]()
         

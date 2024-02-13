@@ -22,7 +22,7 @@ enum RuntimeError: Error {
 }
 
 enum ParsingError: Error {
-    case noCorrespondingJumpAddress(_ token: Character, _ index: Int)
+    case noCorrespondingJumpAddress(_ token: UInt8, _ index: Int)
 }
 
 extension ParsingError: LocalizedError {
