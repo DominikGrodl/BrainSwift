@@ -37,6 +37,10 @@ struct Interpreter {
                 
                 //move to previous slot, creating new memory slots if needed
             case .left:
+                guard memoryPointer > 0 else {
+                    throw InterpretationError.memoryUnderflow
+                }
+                
                 memoryPointer -= 1
                 operationsPointer += 1
                 

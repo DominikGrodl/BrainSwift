@@ -1,25 +1,11 @@
 //
-//  Error.swift
+//  ParsingError.swift
 //
 //
 //  Created by Dominik Grodl on 08.02.2024.
 //
 
 import Foundation
-
-enum ValidationError: Error {
-    case noProgramProvided
-    case noInputPathProvided
-    case unsuportedFileType(String)
-}
-
-enum InterpretationError: Error {
-    case memoryUnderflow
-}
-
-enum RuntimeError: Error {
-    case invalidInput
-}
 
 enum ParsingError: Error {
     case noCorrespondingJumpAddress(_ token: UInt8, _ index: Int)
@@ -36,3 +22,7 @@ extension ParsingError: LocalizedError {
         }
     }
 }
+
+
+
+
